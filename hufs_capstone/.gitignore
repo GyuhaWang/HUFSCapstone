@@ -42,3 +42,27 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# macOS/OSX
+.DS_Store
+
+# Flutter/Dart-specific
+.idea/
+.vscode/
+.pub/
+build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# Node.js-specific
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# TensorFlow-specific
+saved_model/
+model/
+logs/
+tensorboard/
