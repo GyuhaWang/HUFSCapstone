@@ -1,0 +1,20 @@
+{
+  "name": "hufs_capstone",
+  "version": "1.0.0",
+  "description": ".카라멜 소프트와 협력하여 반려견의 행동을 분석 후 화면에 보여주는 프로젝트입니다<br/> .해당 파일은 flutter를 통한 시각화 폴더입니다<br/> .목표 프로토타입<br/> ## Getting Started",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql": "^2.18.1"
+  }
+}
