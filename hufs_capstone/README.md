@@ -1,7 +1,8 @@
 # hufs_capstone
 
-A new Flutter project.
-
+.카라멜 소프트와 협력하여 반려견의 행동을 분석 후 화면에 보여주는 프로젝트입니다.
+.해당 파일은 flutter를 통한 시각화 폴더입니다.
+.목표 프로토타입
 ## Getting Started
 
 This project is a starting point for a Flutter application.
