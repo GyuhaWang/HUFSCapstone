@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hufs_capstone/main_page.dart';
+import 'package:hufs_capstone/pages/pet_info_input_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(GetMaterialApp(
+    home: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -32,7 +36,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: MainPage());
+        home: PetInfoInputPage());
   }
 }
 

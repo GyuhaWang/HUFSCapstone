@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hufs_capstone/pages/pet_info_input_page.dart';
 
 class MainPage extends StatelessWidget {
-  MainPage({super.key});
+  PetInfo petInfos;
+  MainPage({super.key, required this.petInfos});
   double pageHorizontalPadding = 20;
   @override
   Widget build(BuildContext context) {
@@ -52,7 +54,7 @@ class MainPage extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 24),
-                    child: petInfo(),
+                    child: petInfo(data: petInfos),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 24),
@@ -90,7 +92,7 @@ class MainPage extends StatelessWidget {
     );
   }
 
-  Widget petInfo() {
+  Widget petInfo({required PetInfo data}) {
     return Container(
         width: double.infinity,
         decoration: BoxDecoration(
@@ -116,22 +118,22 @@ class MainPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '코코',
+                        '${data.name}',
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        '몸무게 : 20kg',
+                        '몸무게 : ${data.weight}',
                         style: TextStyle(
                             fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        '생일 : 2020/08/19',
+                        '생일 : ${data.birth}',
                         style: TextStyle(
                             fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        '견종 : 푸들',
+                        '견종 : ${data.type}',
                         style: TextStyle(
                             fontSize: 14, fontWeight: FontWeight.bold),
                       ),
