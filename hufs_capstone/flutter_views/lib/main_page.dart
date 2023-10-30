@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:flutter_views/lib/pages/pet_info_input_page.dart';
+import 'package:flutter_views/pages/pet_info_input_page.dart';
 
 class MainPage extends StatelessWidget {
   PetInfo petInfos;
@@ -118,7 +117,7 @@ class MainPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${data.name}',
+                        data.name,
                         style: const TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
@@ -168,13 +167,13 @@ class MainPage extends StatelessWidget {
                   Row(
                     children: [
                       const Flexible(
+                        flex: 1,
                         child: Padding(
                           padding: EdgeInsets.only(right: 12),
                           child: SizedBox(
                             child: Text('X'),
                           ),
                         ),
-                        flex: 1,
                       ),
                       Flexible(
                           flex: 1,
@@ -188,13 +187,13 @@ class MainPage extends StatelessWidget {
                   Row(
                     children: [
                       const Flexible(
+                        flex: 1,
                         child: Padding(
                           padding: EdgeInsets.only(right: 12),
                           child: SizedBox(
                             child: Text('Y'),
                           ),
                         ),
-                        flex: 1,
                       ),
                       Flexible(
                           flex: 1,
@@ -208,13 +207,13 @@ class MainPage extends StatelessWidget {
                   Row(
                     children: [
                       const Flexible(
+                        flex: 1,
                         child: Padding(
                           padding: EdgeInsets.only(right: 12),
                           child: SizedBox(
                             child: Text('Z'),
                           ),
                         ),
-                        flex: 1,
                       ),
                       Flexible(
                           flex: 1,

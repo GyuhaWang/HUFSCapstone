@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hufs_capstone/main_page.dart';
-import 'package:hufs_capstone/pages/pet_info_input_page.dart';
 
 void main() {
   runApp(const GetMaterialApp(

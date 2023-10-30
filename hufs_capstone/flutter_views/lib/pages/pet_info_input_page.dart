@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_views/lib/main.dart';
+import 'package:flutter_views/main_page.dart';
 
 class PetInfoInputPage extends StatefulWidget {
   const PetInfoInputPage({super.key});
