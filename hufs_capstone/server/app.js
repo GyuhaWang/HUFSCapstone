@@ -13,6 +13,22 @@ var cors = require("cors");
 
 app.use(cors());
 
+const { Sequelize } = require("sequelize");
+const sequelize = new Sequelize("database", "username", "password", {
+  host: "localhost",
+  dialect: "mysql", // Or the database dialect you are using
+});
+
+// Test the database connection
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log("Database connection has been established successfully.");
+  })
+  .catch((err) => {
+    console.error("Unable to connect to the database:", err);
+  });
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "flutter_views")));
