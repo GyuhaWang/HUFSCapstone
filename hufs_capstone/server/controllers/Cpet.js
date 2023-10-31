@@ -4,7 +4,7 @@ const { PetInfo } = require("../models"); // Import the PetInfo model
 
 // API 기능설명
 // 'flutter_views'의 'pet_info_input_page.dart' 페이지에서 input된 pet 정보 POST
-router.post("/storePetInfo", async (req, res) => {
+router.post("/pet", async (req, res) => {
   try {
     // req.body에 pet_info 넣기
     const { name, weight, birth, type } = req.body;
