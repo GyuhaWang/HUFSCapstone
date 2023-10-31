@@ -35,6 +35,42 @@
 
 <br/><br/>
 
-# PROTOTYPE
+# 개발진행상황 Update [23.10.31]
 
-![Frame 3390](https://github.com/GyuhaWang/HUFSCapstone/assets/86870218/7b83d345-3afc-492c-beff-8b3ef32a83a3)
+- ERD
+  ![스크린샷 2023-10-31 오후 3 30 08](https://github.com/GyuhaWang/HUFSCapstone/assets/112686847/50d571b7-f48e-4386-ba0d-bf2b656b3ab5)
+
+- ⚙️ http://localhost:8000/api/pet
+
+  - POST request
+  - 'pet_info_input_page.dart'에서 입력받을 PetInfo를 DB에 저장할 때 호출
+
+- ⚙️ http://localhost:8000/api/upload
+
+  - POST request
+  - 'main_page.dart'에서 .csv 파일을 DB에 저장할 때 호출
+
+```
+GestureDetector(
+                onTap: () async {
+                  // Create a Map with the CSV data
+                  Map<String, dynamic> accelerationData = {
+                    // datas
+                  };
+
+                  // POST request
+                  final response = await http.post(
+                    Uri.parse(
+                        'http://localhost:8000/api/upload'), // server URL로 바꿀 것
+                    body: jsonEncode(accelerationData),
+                    headers: {'Content-Type': 'application/json'},
+                  );
+
+                  if (response.statusCode == 201) {
+                    // 저장 성공 시 반응
+                  } else {
+                    // 에러 처리
+                  }
+```
+
+- 현재 flutter와의 연동에 있어서 오류가 있기에 이를 해결중에 있다.
