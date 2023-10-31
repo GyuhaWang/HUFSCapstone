@@ -9,10 +9,7 @@ const logger = require("morgan");
 const app = express();
 
 // router
-const { Sequelize } = require("./models/index");
-const indexRouter = require("./routes/index");
-const petRouter = require("./routes/pet");
-const accelRouter = require("./routes/accel.js");
+const apiRouter = require("./routes/api");
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -21,9 +18,12 @@ var cors = require("cors");
 app.use(cors());
 
 const { Sequelize } = require("sequelize");
-const sequelize = new Sequelize("database", "username", "password", {
+const sequelize = new Sequelize({
+  database: "your_database_name",
+  username: "your_database_username",
+  password: "your_database_password",
   host: "localhost",
-  dialect: "mysql", // Or the database dialect you are using
+  dialect: "mysql",
 });
 
 // Test the database connection
@@ -39,19 +39,14 @@ sequelize
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, "public")));
 
-app.set("views", path.join(__dirname, "flutter_views"));
-app.set("view engine", "ejs");
+app.use(express.static(path.join(__dirname, "flutter_views")));
 
 // port
 const port = 8000;
 
 // router setting
-app.use("/", indexRouter);
-app.use("/pet", petRouter);
-app.use("/upload", accelRouter);
-app.use("/result", resultRouter);
+app.use("/api", apiRouter);
 
 // unidentified routes
 app.use((req, res, next) => {
@@ -59,6 +54,10 @@ app.use((req, res, next) => {
   error.status = 404;
   next(error);
 });
+
+app.get("/", (req, res) =>
+  res.sendFile(path.join(__dirname, "flutter_views", "main_page.html"))
+);
 
 app.listen(port, () =>
   console.log(`App listening at http://localhost:${port}`)

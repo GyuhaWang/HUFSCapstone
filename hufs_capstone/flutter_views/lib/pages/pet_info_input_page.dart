@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:flutter_views/main_page.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class PetInfoInputPage extends StatefulWidget {
   const PetInfoInputPage({super.key});
@@ -118,11 +118,27 @@ class _PetInfoInputPageState extends State<PetInfoInputPage> {
                 )),
                 GestureDetector(
                   onTap: () async {
-                    petInfo = editPetInfo(
-                        name.text, weight.text, birth.text, type.text);
-                    Get.to(() => MainPage(
-                          petInfos: petInfo,
-                        ));
+                    // Create a Map with the pet info data
+                    Map<String, String> petInfoData = {
+                      "name": name.text,
+                      "weight": weight.text,
+                      "birth": birth.text,
+                      "type": type.text,
+                    };
+
+                    // POST request
+                    final response = await http.post(
+                      Uri.parse(
+                          'http://localhost:8000/api/pet'), // server URL로 차후에 바꿀것
+                      body: jsonEncode(petInfoData),
+                      headers: {'Content-Type': 'application/json'},
+                    );
+
+                    if (response.statusCode == 201) {
+                      // 저장 성공시 반응
+                    } else {
+                      // 에러 처리
+                    }
                   },
                   child: Container(
                     decoration: BoxDecoration(

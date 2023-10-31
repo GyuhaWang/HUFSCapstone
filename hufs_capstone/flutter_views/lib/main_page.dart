@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_views/pages/pet_info_input_page.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class MainPage extends StatelessWidget {
   PetInfo petInfos;
@@ -228,13 +230,30 @@ class MainPage extends StatelessWidget {
               )),
               GestureDetector(
                 onTap: () async {
-                  // await Get.dialog(Container(
-                  //   width: 300,
-                  //   height: 300,
-                  //   child: Center(
-                  //     child: Text("입력 완료"),
-                  //   ),
-                  // ));
+                  // Create a Map with the CSV data
+                  Map<String, dynamic> accelerationData = {
+                    // "x": xValue, // Replace with your data
+                    // "y": yValue, // Replace with your data
+                    // "z": zValue, // Replace with your data
+                    // "create_date": createDate, // Replace with your data
+                    // "device_id": deviceId, // Replace with your data
+                    // "pet_id": petId, // Replace with your data
+                    // "user_id": userId, // Replace with your data
+                  };
+
+                  // POST request
+                  final response = await http.post(
+                    Uri.parse(
+                        'http://localhost:8000/api/upload'), // server URL로 차후에 바꿀 것
+                    body: jsonEncode(accelerationData),
+                    headers: {'Content-Type': 'application/json'},
+                  );
+
+                  if (response.statusCode == 201) {
+                    // 저장 성공 시 반응
+                  } else {
+                    // 에러 처리
+                  }
                 },
                 child: Container(
                   decoration: BoxDecoration(
