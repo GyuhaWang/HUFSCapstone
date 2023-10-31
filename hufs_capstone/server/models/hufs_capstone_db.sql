@@ -7,7 +7,7 @@ CREATE TABLE `acceleration_data` (
 	`create_date` DATETIME,               -- 생성 날짜 및 시간
 	`device_id` INT,                      -- 디바이스 ID
 	`pet_id` INT,                         -- 반려동물 ID
-	`user_id` CHAR(20)                   -- 사용자 ID
+	`user_id` INT,                        -- 사용자 ID
 );
 
 -- 데이터 세트를 위한 테이블
