@@ -12,7 +12,7 @@ const app = express();
 const { Sequelize } = require("./models/index");
 const indexRouter = require("./routes/index");
 const petRouter = require("./routes/pet");
-const accelRouter = require("./routes/accel");
+const accelRouter = require("./routes/accel.js");
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -51,7 +51,7 @@ const port = 8000;
 app.use("/", indexRouter);
 app.use("/pet", petRouter);
 app.use("/upload", accelRouter);
-app.use("/resulte", resulteRouter);
+app.use("/result", resultRouter);
 
 // unidentified routes
 app.use((req, res, next) => {
