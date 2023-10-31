@@ -1,30 +1,49 @@
-const express = require("express");
-const router = express.Router();
-const { PetInfo } = require("../models"); // Import the PetInfo model
+const { PetInfo, AccelerationData } = require("../models/index");
 
-// API 기능설명
-// 'flutter_views'의 'pet_info_input_page.dart' 페이지에서 input된 pet 정보 POST
-router.post("/pet", async (req, res) => {
-  try {
-    // req.body에 pet_info 넣기
-    const { name, weight, birth, type } = req.body;
+const controller = {
+  // Controller to store pet information
+  pet: async (req, res) => {
+    try {
+      // Extract pet information from the request body
+      const { name, weight, birth, type } = req.body;
 
-    // pet_info entry DB에 만들기
-    const petInfo = await PetInfo.create({
-      name,
-      weight,
-      birth,
-      type,
-    });
+      // Create a new pet info record in the database
+      const newPet = await PetInfo.create({
+        name,
+        weight,
+        birth,
+        type,
+      });
 
-    // 성공메세지와 함께 pet_info 반환
-    res.status(201).json({ message: "반려동물 정보 저장 성공", petInfo });
-  } catch (error) {
-    console.error(error);
-    res
-      .status(500)
-      .json({ message: "ERROR: 반려동물의 정보를 저장하지 못했습니다." });
-  }
-});
+      // Send a success response
+      res.status(201).json({ message: "반려동물 저장 성공", data: newPet });
+    } catch (error) {
+      // Handle errors and send an error response
+      console.error("Error saving pet information:", error);
+      res.status(500).json({ error: "반려동물의 정보를 저장하지 못했습니다." });
+    }
+  },
 
-module.exports = router;
+  // Controller to handle CSV file upload
+  upload: async (req, res) => {
+    try {
+      // Check if a file is included in the request
+      if (!req.file) {
+        return res.status(400).json({ error: "CSV 파일이 없습니다." });
+      }
+
+      // Process the CSV data and save it in the database
+      const csvData = req.file.buffer.toString(); // Assuming 'req.file' contains the CSV file data
+      // You can parse and save the 'csvData' into the 'AccelerationData' model
+
+      // Send a success response
+      res.status(201).json({ message: "CSV 업로드 & DB 저장 성공" });
+    } catch (error) {
+      // Handle errors and send an error response
+      console.error("Error uploading and processing CSV file:", error);
+      res.status(500).json({ error: "CSV 파일을 저장하지 못했습니다." });
+    }
+  },
+};
+
+module.exports = controller;
