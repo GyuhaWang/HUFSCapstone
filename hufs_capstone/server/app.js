@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "flutter_views")));
 
 app.set("views", path.join(__dirname, "flutter_views"));
-app.set("view engine", "dart");
+app.set("view engine", "ejs");
 
 app.get("/", (req, res) => res.render("main"));
 
