@@ -41,6 +41,10 @@
 
   ![스크린샷 2023-10-31 오후 3 30 08](https://github.com/GyuhaWang/HUFSCapstone/assets/112686847/50d571b7-f48e-4386-ba0d-bf2b656b3ab5)
 
+- Sequalize module을 사용하여 DB 조작
+
+  
+
 - ⚙️ http://localhost:8000/api/pet
 
   - POST request
