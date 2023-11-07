@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hufs_capstone/pages/pet_info_input_page.dart';
+import 'package:hufs_capstone/pet_info/data/pet_info_model.dart';
 
 class MainPage extends StatelessWidget {
-  PetInfo petInfos;
+  PetInfoModel petInfos;
   MainPage({super.key, required this.petInfos});
   double pageHorizontalPadding = 20;
   @override
@@ -92,7 +92,7 @@ class MainPage extends StatelessWidget {
     );
   }
 
-  Widget petInfo({required PetInfo data}) {
+  Widget petInfo({required PetInfoModel data}) {
     return Container(
         width: double.infinity,
         decoration: BoxDecoration(
@@ -128,7 +128,7 @@ class MainPage extends StatelessWidget {
                             fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        '생일 : ${data.birth}',
+                        '나이 : ${data.age}',
                         style: TextStyle(
                             fontSize: 14, fontWeight: FontWeight.bold),
                       ),
