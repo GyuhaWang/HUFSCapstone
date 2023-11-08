@@ -1,33 +1,36 @@
-class PetInfoModel {
-  final int userId;
-  final int age;
-  final int weight;
-  final String name;
-  final String type;
+import 'package:dartz/dartz.dart';
+import 'package:hufs_capstone/pet_info/data/services.dart';
 
-  const PetInfoModel(
-      {required this.userId,
-      this.age = 0,
+class PetInfoModel {
+  int pet_id;
+  String birth;
+  int weight;
+  String name;
+  String type;
+
+  PetInfoModel(
+      {required this.pet_id,
+      this.birth = "",
       this.weight = 0,
       this.name = "",
       this.type = ""})
       : super();
 
   PetInfoModel.fromJson(Map<String, dynamic> json)
-      : userId = json['UserId'],
-        age = json['age'],
+      : pet_id = json['pet_id'],
+        birth = json['birth'],
         weight = json['weight'],
         name = json['name'],
         type = json['type'];
 
   Map<String, dynamic> toJson() => {
-        'UserId': userId,
-        'age': age,
+        'pet_id': pet_id,
+        'birth': birth,
         'weight': weight,
         'name': name,
         'type': type
       };
   bool isEmpty() {
-    return userId == '-1';
+    return pet_id == '-1';
   }
 }

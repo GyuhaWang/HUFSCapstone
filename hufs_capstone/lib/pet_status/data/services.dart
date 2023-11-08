@@ -1,29 +1,31 @@
-import 'dart:convert';
-
-import 'package:dartz/dartz.dart';
-import 'package:hufs_capstone/pet_info/data/pet_info_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'package:hufs_capstone/pet_status/ViewModel/pet_status_model.dart';
 
 class PetInfoService {
-  static Future<Either<bool, PetInfoModel>> getPetInfo(int userId) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String? value = prefs.getString(id.toString());
-    if (value != null) {
-      return Right(PetInfoModel.fromJson(json.decode(value)));
-    } else {
-      return const Left(false);
-    }
-  }
+  // static Future<String> getPetStatus() async {
 
-  static Future<Either<bool, PetInfoModel>> createPerInfo(
-      PetInfoModel petinfo) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final bool value =
-        await prefs.setString(petinfo.userId.toString(), json.encode(petinfo));
-    if (value) {
-      return Right(petinfo);
-    } else {
-      return Left(false);
+  // }
+
+  static Future<String> uploadFile(PetStatusModel petStatusModel) async {
+    // http 통신
+
+    try {
+      var request = http.MultipartRequest(
+          'POST', Uri.parse('http://localhost:8000/api/upload'));
+      request.files.add(
+          await http.MultipartFile.fromPath('file', petStatusModel.file.path));
+
+      var response = await request.send();
+      if (response.statusCode == 200) {
+        print('File uploaded');
+        return "success";
+      } else {
+        print('File upload failed with status code: ${response.statusCode}');
+        return 'fail';
+      }
+    } catch (e) {
+      print('File upload error: $e');
+      return 'fail';
     }
   }
 }

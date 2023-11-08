@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hufs_capstone/main_page.dart';
 
 import 'package:hufs_capstone/pet_info/View/pet_info_view.dart';
 

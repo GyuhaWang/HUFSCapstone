@@ -1,11 +1,20 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:hufs_capstone/pet_info/data/pet_info_model.dart';
+import 'dart:convert';
+import 'dart:io';
 
-class MainPage extends StatelessWidget {
+import 'package:csv/csv.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:hufs_capstone/pet_info/ViewModel/pet_info_model.dart';
+import 'package:hufs_capstone/pet_status/ViewModel/pet_status_model.dart';
+
+class PetStatus extends StatelessWidget {
   PetInfoModel petInfos;
-  MainPage({super.key, required this.petInfos});
+  PetStatus({super.key, required this.petInfos});
   double pageHorizontalPadding = 20;
+  List<File> csv_data = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +67,7 @@ class MainPage extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 24),
-                    child: status(),
+                    child: SelectSampleData(),
                   )
                 ],
               ),
@@ -128,7 +137,7 @@ class MainPage extends StatelessWidget {
                             fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        '나이 : ${data.age}',
+                        '생일 : ${data.birth}',
                         style: TextStyle(
                             fontSize: 14, fontWeight: FontWeight.bold),
                       ),
@@ -145,8 +154,69 @@ class MainPage extends StatelessWidget {
           ),
         ));
   }
+}
 
-  Widget status() {
+class SelectSampleData extends StatefulWidget {
+  const SelectSampleData({super.key});
+
+  @override
+  State<SelectSampleData> createState() => _SelectSampleDataState();
+}
+
+class _SelectSampleDataState extends State<SelectSampleData> {
+  List<File> csv_data = [];
+  int selected_csv_index = 0;
+  @override
+  void initState() {
+    // TODO: implement initState
+    for (int i = 1; i < 11; i++) {
+      csv_data.add(File('assets/csv/sample_data_${i}.csv'));
+    }
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return status(fileList: csv_data);
+  }
+
+  Widget statusRow(
+      {required PetStatusModel data,
+      required bool isChecked,
+      required Function onClick}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Checkbox(
+            value: isChecked,
+            onChanged: (bool) {
+              onClick();
+            }),
+        Text(data.file.path),
+        GestureDetector(
+          onTap: () async {
+            String csv = await loadingCsvData(data.file.path);
+            Get.dialog(Container(
+                width: double.infinity,
+                color: Colors.black,
+                height: 400,
+                child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Text(
+                      csv,
+                      style: TextStyle(fontSize: 12, color: Colors.white),
+                    ))));
+          },
+          child: Text(
+            '자세히 보기',
+            style: TextStyle(fontSize: 12),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget status({required List<File> fileList}) {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -159,74 +229,89 @@ class MainPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'x,y,z 축 입력하기',
+                '선택된 데이터 번호: ${selected_csv_index + 1}',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-              Form(
-                  child: Column(
+              Column(
                 children: [
-                  Row(
-                    children: [
-                      Flexible(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 12),
-                          child: SizedBox(
-                            child: Text('X'),
-                          ),
-                        ),
-                        flex: 1,
-                      ),
-                      Flexible(
-                          flex: 1,
-                          child: Container(
-                            child: TextField(
-                              keyboardType: TextInputType.number,
-                            ),
-                          ))
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Flexible(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 12),
-                          child: SizedBox(
-                            child: Text('Y'),
-                          ),
-                        ),
-                        flex: 1,
-                      ),
-                      Flexible(
-                          flex: 1,
-                          child: Container(
-                            child: TextField(
-                              keyboardType: TextInputType.number,
-                            ),
-                          ))
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Flexible(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 12),
-                          child: SizedBox(
-                            child: Text('Z'),
-                          ),
-                        ),
-                        flex: 1,
-                      ),
-                      Flexible(
-                          flex: 1,
-                          child: Container(
-                            child: TextField(
-                              keyboardType: TextInputType.number,
-                            ),
-                          ))
-                    ],
-                  ),
+                  for (int i = 0; i < fileList.length; i++)
+                    statusRow(
+                      data: PetStatusModel(file: fileList[i]),
+                      isChecked: i == selected_csv_index,
+                      onClick: () {
+                        setState(() {
+                          selected_csv_index = i;
+                        });
+                      },
+                    )
                 ],
-              )),
+              ),
+              // Form(
+              //     child: Column(
+              //   children: [
+              //     Row(
+              //       children: [
+              //         Flexible(
+              //           child: Padding(
+              //             padding: const EdgeInsets.only(right: 12),
+              //             child: SizedBox(
+              //               child: Text('X'),
+              //             ),
+              //           ),
+              //           flex: 1,
+              //         ),
+              //         Flexible(
+              //             flex: 1,
+              //             child: Container(
+              //               child: TextField(
+              //                 keyboardType: TextInputType.number,
+              //               ),
+              //             ))
+              //       ],
+              //     ),
+              //     Row(
+              //       children: [
+              //         Flexible(
+              //           child: Padding(
+              //             padding: const EdgeInsets.only(right: 12),
+              //             child: SizedBox(
+              //               child: Text('Y'),
+              //             ),
+              //           ),
+              //           flex: 1,
+              //         ),
+              //         Flexible(
+              //             flex: 1,
+              //             child: Container(
+              //               child: TextField(
+              //                 keyboardType: TextInputType.number,
+              //               ),
+              //             ))
+              //       ],
+              //     ),
+              //     Row(
+              //       children: [
+              //         Flexible(
+              //           child: Padding(
+              //             padding: const EdgeInsets.only(right: 12),
+              //             child: SizedBox(
+              //               child: Text('Z'),
+              //             ),
+              //           ),
+              //           flex: 1,
+              //         ),
+              //         Flexible(
+              //             flex: 1,
+              //             child: Container(
+              //               child: TextField(
+              //                 keyboardType: TextInputType.number,
+              //               ),
+              //             ))
+              //       ],
+              //     ),
+              //   ],
+              // )
+              // ),
               GestureDetector(
                 onTap: () async {
                   // await Get.dialog(Container(
@@ -260,4 +345,16 @@ class MainPage extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<String> loadingCsvData(String path) async {
+  final csvFile = await rootBundle.loadString(path);
+
+  // return await csvFile
+  //     .transform(utf8.decoder)
+  //     .transform(
+  //       CsvToListConverter(),
+  //     )
+  //     .toList();
+  return csvFile;
 }

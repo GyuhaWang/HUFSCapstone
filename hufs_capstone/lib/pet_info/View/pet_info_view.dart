@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hufs_capstone/main_page.dart';
 import 'package:hufs_capstone/pet_info/ViewModel/controller.dart';
-
-import 'package:hufs_capstone/pet_info/data/pet_info_model.dart';
+import 'package:hufs_capstone/pet_info/ViewModel/pet_info_model.dart';
+import 'package:hufs_capstone/pet_status/View/pet_status_view.dart';
 
 class PetInfoInputPage extends StatefulWidget {
   const PetInfoInputPage({super.key});
@@ -128,12 +127,12 @@ class _PetInfoInputPageState extends State<PetInfoInputPage> {
                 GestureDetector(
                   onTap: () async {
                     await PetInfoController.to.createPetInfo(PetInfoModel(
-                        userId: 1,
-                        age: int.parse(age.text),
+                        pet_id: 1,
+                        birth: age.text,
                         weight: int.parse(weight.text),
                         name: name.text,
                         type: type.text));
-                    Get.to(() => MainPage(
+                    Get.to(() => PetStatus(
                           petInfos: PetInfoController.to.petInfo,
                         ));
                   },
