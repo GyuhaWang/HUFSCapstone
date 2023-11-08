@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+<<<<<<<< HEAD:hufs_capstone/flutter_views/lib/pages/pet_info_input_page.dart
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+========
+import 'package:get/get.dart';
+import 'package:hufs_capstone/pet_info/ViewModel/controller.dart';
+import 'package:hufs_capstone/pet_info/ViewModel/pet_info_model.dart';
+import 'package:hufs_capstone/pet_status/View/pet_status_view.dart';
+>>>>>>>> 8b395e2609e68aacaac81a534974a9d119a91c3b:hufs_capstone/lib/pet_info/View/pet_info_view.dart
 
 class PetInfoInputPage extends StatefulWidget {
   const PetInfoInputPage({super.key});
@@ -10,10 +17,16 @@ class PetInfoInputPage extends StatefulWidget {
 }
 
 class _PetInfoInputPageState extends State<PetInfoInputPage> {
-  late PetInfo petInfo;
+  @override
+  void initState() {
+    Get.put(PetInfoController());
+    super.initState();
+  }
+
+  TextEditingController age = TextEditingController();
   TextEditingController name = TextEditingController();
   TextEditingController weight = TextEditingController();
-  TextEditingController birth = TextEditingController();
+
   TextEditingController type = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -79,7 +92,7 @@ class _PetInfoInputPageState extends State<PetInfoInputPage> {
                           child: Padding(
                             padding: EdgeInsets.only(right: 12),
                             child: SizedBox(
-                              child: Text('생일'),
+                              child: Text('나이'),
                             ),
                           ),
                         ),
@@ -87,8 +100,8 @@ class _PetInfoInputPageState extends State<PetInfoInputPage> {
                             flex: 1,
                             child: Container(
                               child: TextField(
-                                controller: birth,
-                                keyboardType: TextInputType.datetime,
+                                controller: age,
+                                keyboardType: TextInputType.number,
                               ),
                             ))
                       ],
@@ -118,6 +131,7 @@ class _PetInfoInputPageState extends State<PetInfoInputPage> {
                 )),
                 GestureDetector(
                   onTap: () async {
+<<<<<<<< HEAD:hufs_capstone/flutter_views/lib/pages/pet_info_input_page.dart
                     // Create a Map with the pet info data
                     Map<String, String> petInfoData = {
                       "name": name.text,
@@ -139,6 +153,17 @@ class _PetInfoInputPageState extends State<PetInfoInputPage> {
                     } else {
                       // 에러 처리
                     }
+========
+                    await PetInfoController.to.createPetInfo(PetInfoModel(
+                        pet_id: 1,
+                        birth: age.text,
+                        weight: int.parse(weight.text),
+                        name: name.text,
+                        type: type.text));
+                    Get.to(() => PetStatus(
+                          petInfos: PetInfoController.to.petInfo,
+                        ));
+>>>>>>>> 8b395e2609e68aacaac81a534974a9d119a91c3b:hufs_capstone/lib/pet_info/View/pet_info_view.dart
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -162,20 +187,4 @@ class _PetInfoInputPageState extends State<PetInfoInputPage> {
       ),
     );
   }
-}
-
-PetInfo editPetInfo(String name, String weight, String birth, String type) {
-  return PetInfo(name: name, birth: birth, weight: weight, type: type);
-}
-
-class PetInfo {
-  String name;
-  String weight;
-  String birth;
-  String type;
-  PetInfo(
-      {required this.name,
-      required this.birth,
-      required this.weight,
-      required this.type});
 }
