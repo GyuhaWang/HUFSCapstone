@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter_views/pet_info/ViewModel/pet_info_model.dart';

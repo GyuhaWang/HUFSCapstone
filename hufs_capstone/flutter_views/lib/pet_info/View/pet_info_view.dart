@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-<<<<<<<< HEAD:hufs_capstone/flutter_views/lib/pages/pet_info_input_page.dart
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-========
 import 'package:get/get.dart';
-import 'package:hufs_capstone/pet_info/ViewModel/controller.dart';
-import 'package:hufs_capstone/pet_info/ViewModel/pet_info_model.dart';
-import 'package:hufs_capstone/pet_status/View/pet_status_view.dart';
->>>>>>>> 8b395e2609e68aacaac81a534974a9d119a91c3b:hufs_capstone/lib/pet_info/View/pet_info_view.dart
+import 'package:flutter_views/pet_info/ViewModel/controller.dart';
+import 'package:flutter_views/pet_info/ViewModel/pet_info_model.dart';
+import 'package:flutter_views/pet_status/View/pet_status_view.dart';
 
 class PetInfoInputPage extends StatefulWidget {
   const PetInfoInputPage({super.key});
@@ -131,29 +126,6 @@ class _PetInfoInputPageState extends State<PetInfoInputPage> {
                 )),
                 GestureDetector(
                   onTap: () async {
-<<<<<<<< HEAD:hufs_capstone/flutter_views/lib/pages/pet_info_input_page.dart
-                    // Create a Map with the pet info data
-                    Map<String, String> petInfoData = {
-                      "name": name.text,
-                      "weight": weight.text,
-                      "birth": birth.text,
-                      "type": type.text,
-                    };
-
-                    // POST request
-                    final response = await http.post(
-                      Uri.parse(
-                          'http://localhost:8000/api/pet'), // server URL로 차후에 바꿀것
-                      body: jsonEncode(petInfoData),
-                      headers: {'Content-Type': 'application/json'},
-                    );
-
-                    if (response.statusCode == 201) {
-                      // 저장 성공시 반응
-                    } else {
-                      // 에러 처리
-                    }
-========
                     await PetInfoController.to.createPetInfo(PetInfoModel(
                         pet_id: 1,
                         birth: age.text,
@@ -163,7 +135,6 @@ class _PetInfoInputPageState extends State<PetInfoInputPage> {
                     Get.to(() => PetStatus(
                           petInfos: PetInfoController.to.petInfo,
                         ));
->>>>>>>> 8b395e2609e68aacaac81a534974a9d119a91c3b:hufs_capstone/lib/pet_info/View/pet_info_view.dart
                   },
                   child: Container(
                     decoration: BoxDecoration(

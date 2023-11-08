@@ -1,20 +1,13 @@
-<<<<<<<< HEAD:hufs_capstone/flutter_views/lib/main.dart
-import 'package:flutter/material.dart';
-import 'package:flutter_views/pages/pet_info_input_page.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-========
 import 'dart:convert';
 import 'dart:io';
->>>>>>>> 8b395e2609e68aacaac81a534974a9d119a91c3b:hufs_capstone/lib/pet_status/View/pet_status_view.dart
 
 import 'package:csv/csv.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:hufs_capstone/pet_info/ViewModel/pet_info_model.dart';
-import 'package:hufs_capstone/pet_status/ViewModel/pet_status_model.dart';
+import 'package:flutter_views/pet_info/ViewModel/pet_info_model.dart';
+import 'package:flutter_views/pet_status/ViewModel/pet_status_model.dart';
 
 class PetStatus extends StatelessWidget {
   PetInfoModel petInfos;
@@ -83,7 +76,7 @@ class PetStatus extends StatelessWidget {
     );
   }
 
-  Widget imageWidget(String assetUrl) {
+  Widget ImageWidget(String assetUrl) {
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -235,79 +228,13 @@ class _SelectSampleDataState extends State<SelectSampleData> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-<<<<<<<< HEAD:hufs_capstone/flutter_views/lib/main.dart
-              const Text(
-                'x,y,z 축 입력하기',
-========
               Text(
                 '선택된 데이터 번호: ${selected_csv_index + 1}',
->>>>>>>> 8b395e2609e68aacaac81a534974a9d119a91c3b:hufs_capstone/lib/pet_status/View/pet_status_view.dart
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               Column(
                 children: [
-<<<<<<<< HEAD:hufs_capstone/flutter_views/lib/main.dart
-                  Row(
-                    children: [
-                      const Flexible(
-                        flex: 1,
-                        child: Padding(
-                          padding: EdgeInsets.only(right: 12),
-                          child: SizedBox(
-                            child: Text('X'),
-                          ),
-                        ),
-                      ),
-                      Flexible(
-                          flex: 1,
-                          child: Container(
-                            child: const TextField(
-                              keyboardType: TextInputType.number,
-                            ),
-                          ))
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      const Flexible(
-                        flex: 1,
-                        child: Padding(
-                          padding: EdgeInsets.only(right: 12),
-                          child: SizedBox(
-                            child: Text('Y'),
-                          ),
-                        ),
-                      ),
-                      Flexible(
-                          flex: 1,
-                          child: Container(
-                            child: const TextField(
-                              keyboardType: TextInputType.number,
-                            ),
-                          ))
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      const Flexible(
-                        flex: 1,
-                        child: Padding(
-                          padding: EdgeInsets.only(right: 12),
-                          child: SizedBox(
-                            child: Text('Z'),
-                          ),
-                        ),
-                      ),
-                      Flexible(
-                          flex: 1,
-                          child: Container(
-                            child: const TextField(
-                              keyboardType: TextInputType.number,
-                            ),
-                          ))
-                    ],
-                  ),
-========
                   for (int i = 0; i < fileList.length; i++)
                     statusRow(
                       data: PetStatusModel(file: fileList[i]),
@@ -318,7 +245,6 @@ class _SelectSampleDataState extends State<SelectSampleData> {
                         });
                       },
                     )
->>>>>>>> 8b395e2609e68aacaac81a534974a9d119a91c3b:hufs_capstone/lib/pet_status/View/pet_status_view.dart
                 ],
               ),
               // Form(
@@ -389,30 +315,13 @@ class _SelectSampleDataState extends State<SelectSampleData> {
               // ),
               GestureDetector(
                 onTap: () async {
-                  // Create a Map with the CSV data
-                  Map<String, dynamic> accelerationData = {
-                    // "x": xValue, // Replace with your data
-                    // "y": yValue, // Replace with your data
-                    // "z": zValue, // Replace with your data
-                    // "create_date": createDate, // Replace with your data
-                    // "device_id": deviceId, // Replace with your data
-                    // "pet_id": petId, // Replace with your data
-                    // "user_id": userId, // Replace with your data
-                  };
-
-                  // POST request
-                  final response = await http.post(
-                    Uri.parse(
-                        'http://localhost:8000/api/upload'), // server URL로 차후에 바꿀 것
-                    body: jsonEncode(accelerationData),
-                    headers: {'Content-Type': 'application/json'},
-                  );
-
-                  if (response.statusCode == 201) {
-                    // 저장 성공 시 반응
-                  } else {
-                    // 에러 처리
-                  }
+                  // await Get.dialog(Container(
+                  //   width: 300,
+                  //   height: 300,
+                  //   child: Center(
+                  //     child: Text("입력 완료"),
+                  //   ),
+                  // ));
                 },
                 child: Container(
                   decoration: BoxDecoration(

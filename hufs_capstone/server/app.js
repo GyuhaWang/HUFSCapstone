@@ -19,9 +19,9 @@ app.use(cors());
 
 const { Sequelize } = require("sequelize");
 const sequelize = new Sequelize({
-  database: "your_database_name",
-  username: "your_database_username",
-  password: "your_database_password",
+  database: "capstone",
+  username: "root",
+  password: "9698",
   host: "localhost",
   dialect: "mysql",
 });
