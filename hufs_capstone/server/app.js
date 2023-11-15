@@ -29,7 +29,6 @@ const sequelize = new Sequelize({
 // Test the database connection
 sequelize
   .sync({ force: false })
-  .authenticate()
   .then(() => {
     console.log("Database 연결 성공");
   })

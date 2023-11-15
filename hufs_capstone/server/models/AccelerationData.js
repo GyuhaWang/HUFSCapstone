@@ -1,5 +1,3 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../config/config");
 /* 
 CREATE TABLE `acceleration_data` (
 	`id` INT NOT NULL PRIMARY KEY,        -- 고유 ID
@@ -12,19 +10,21 @@ CREATE TABLE `acceleration_data` (
 	`user_id` INT,                        -- 사용자 ID
 );
 */
-const AccelerationData = sequelize.define("AccelerationData", {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-  },
-  x: DataTypes.INTEGER,
-  y: DataTypes.INTEGER,
-  z: DataTypes.INTEGER,
-  create_date: DataTypes.DATE,
-  device_id: DataTypes.INTEGER,
-  pet_id: DataTypes.INTEGER,
-  user_id: DataTypes.INTEGER,
-});
-
+const AccelerationData = function (Sequelize, DataTypes) {
+  const model = Sequelize.define("acceleration_data", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    x: DataTypes.INTEGER,
+    y: DataTypes.INTEGER,
+    z: DataTypes.INTEGER,
+    create_date: DataTypes.DATE,
+    device_id: DataTypes.INTEGER,
+    pet_id: DataTypes.INTEGER,
+    user_id: DataTypes.INTEGER,
+  });
+  return model;
+};
 module.exports = AccelerationData;

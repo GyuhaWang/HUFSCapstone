@@ -1,5 +1,3 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../config/config");
 /*
 CREATE TABLE `data_set` (
 	`set_id` INT NOT NULL PRIMARY KEY,    -- 데이터 세트 ID
@@ -8,15 +6,17 @@ CREATE TABLE `data_set` (
 	`pet_id` INT,                         -- 반려동물 ID
 );
 */
-const DataSet = sequelize.define("DataSet", {
-  set_id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-  },
-  start_id: DataTypes.INTEGER,
-  end_id: DataTypes.INTEGER,
-  pet_id: DataTypes.INTEGER,
-});
-
+const DataSet = function (Sequelize, DataTypes) {
+  const model = Sequelize.define("data_set", {
+    set_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    start_id: DataTypes.INTEGER,
+    end_id: DataTypes.INTEGER,
+    pet_id: DataTypes.INTEGER,
+  });
+  return model;
+};
 module.exports = DataSet;

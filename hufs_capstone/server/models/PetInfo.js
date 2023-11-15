@@ -1,5 +1,3 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../config/config");
 /*
 CREATE TABLE `pet_info` (
 	`pet_id` INT NOT NULL PRIMARY KEY,    -- 반려동물 ID
@@ -9,16 +7,18 @@ CREATE TABLE `pet_info` (
 	`type` CHAR(20)                       -- 종류
 );
 */
-const PetInfo = sequelize.define("PetInfo", {
-  pet_id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-  },
-  name: DataTypes.STRING(20),
-  birth: DataTypes.DATE,
-  weight: DataTypes.DECIMAL(5, 2),
-  type: DataTypes.STRING(20),
-});
-
+const PetInfo = function (Sequelize, DataTypes) {
+  const model = Sequelize.define("pet_info", {
+    pet_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: DataTypes.STRING(20),
+    birth: DataTypes.DATE,
+    weight: DataTypes.DECIMAL(5, 2),
+    type: DataTypes.STRING(20),
+  });
+  return model;
+};
 module.exports = PetInfo;
