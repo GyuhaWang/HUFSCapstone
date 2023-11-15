@@ -1,6 +1,5 @@
 const { DataTypes } = require("sequelize");
-const sequelize = require("../config/database"); // Import your Sequelize configuration
-
+const sequelize = require("../config/config");
 /* 
 CREATE TABLE `acceleration_data` (
 	`id` INT NOT NULL PRIMARY KEY,        -- 고유 ID
@@ -13,7 +12,6 @@ CREATE TABLE `acceleration_data` (
 	`user_id` INT,                        -- 사용자 ID
 );
 */
-
 const AccelerationData = sequelize.define("AccelerationData", {
   id: {
     type: DataTypes.INTEGER,

@@ -1,6 +1,5 @@
 const { DataTypes } = require("sequelize");
-const sequelize = require("../config/database"); // Import your Sequelize configuration
-
+const sequelize = require("../config/config");
 /*
 CREATE TABLE `pet_info` (
 	`pet_id` INT NOT NULL PRIMARY KEY,    -- 반려동물 ID
@@ -10,7 +9,6 @@ CREATE TABLE `pet_info` (
 	`type` CHAR(20)                       -- 종류
 );
 */
-
 const PetInfo = sequelize.define("PetInfo", {
   pet_id: {
     type: DataTypes.INTEGER,
