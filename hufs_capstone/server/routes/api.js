@@ -1,5 +1,5 @@
 const express = require("express");
-const controller = require("../controllers/Capi");
+const controller = require("../presenter/P_api");
 const router = express.Router();
 
 // http://localhost:8000/api/pet
