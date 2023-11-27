@@ -22,7 +22,7 @@ const AccelerationData = function (Sequelize, DataTypes) {
       x: DataTypes.INTEGER,
       y: DataTypes.INTEGER,
       z: DataTypes.INTEGER,
-      create_date: DataTypes.DATE,
+      create_date: DataTypes.DATETIME,
       device_id: {
         type: DataTypes.INTEGER,
         allowNull: true,

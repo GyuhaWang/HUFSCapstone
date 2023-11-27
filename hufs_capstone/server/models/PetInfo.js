@@ -17,19 +17,19 @@ const PetInfo = function (Sequelize, DataTypes) {
         autoIncrement: true,
       },
       name: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(20),
         allowNull: false,
-      },
-      weight: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
       },
       birth: {
         type: DataTypes.DATE,
         allowNull: true,
       },
+      weight: {
+        type: DataTypes.DECIMAL(5, 2),
+        allowNull: true,
+      },
       type: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(20),
         allowNull: true,
       },
     },
