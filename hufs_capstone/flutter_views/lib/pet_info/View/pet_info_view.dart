@@ -126,7 +126,7 @@ class _PetInfoInputPageState extends State<PetInfoInputPage> {
                 )),
                 GestureDetector(
                   onTap: () async {
-                    await PetInfoController.to.createPetInfo(PetInfoModel(
+                    await PetInfoController.to.uploadPetInfo(PetInfoModel(
                         pet_id: 1,
                         birth: age.text,
                         weight: int.parse(weight.text),

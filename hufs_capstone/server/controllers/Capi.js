@@ -1,4 +1,5 @@
-const { PetInfo, AccelerationData } = require("../models/index");
+const { PetInfo, AccelerationData } = require("../models");
+const csv = require("fast-csv");
 
 const controller = {
   // Controller to store pet information
@@ -6,15 +7,15 @@ const controller = {
     try {
       // Extract pet information from the request body
       const { name, weight, birth, type } = req.body;
+      print(req.body);
 
       // Create a new pet info record in the database
-      const newPet = await PetInfo.create({
+      models.PetInfo.create({
         name,
         weight,
         birth,
         type,
       });
-
       // Send a success response
       res.status(201).json({ message: "반려동물 저장 성공", data: newPet });
     } catch (error) {
@@ -34,10 +35,16 @@ const controller = {
 
       // Process the CSV data and save it in the database
       const csvData = req.file.buffer.toString(); // Assuming 'req.file' contains the CSV file data
-      // You can parse and save the 'csvData' into the 'AccelerationData' model
-
-      // Send a success response
-      res.status(201).json({ message: "CSV 업로드 & DB 저장 성공" });
+      const rows = [];
+      csv
+        .parseString(csvData)
+        .on("data", (row) => {
+          rows.push(row);
+        })
+        .on("end", async () => {
+          await AccelerationData.bulkCreate(rows);
+          res.status(201).json({ message: "CSV 업로드 & DB 저장 성공" });
+        });
     } catch (error) {
       // Handle errors and send an error response
       console.error("Error uploading and processing CSV file:", error);
