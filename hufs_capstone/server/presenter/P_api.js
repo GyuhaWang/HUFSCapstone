@@ -1,5 +1,6 @@
 const { PetInfo, AccelerationData } = require("../models");
 const csv = require("fast-csv");
+const tf = require("@tensorflow/tfjs-node");
 
 const controller = {
   // Controller to store pet information
@@ -7,10 +8,10 @@ const controller = {
     try {
       // Extract pet information from the request body
       const { name, weight, birth, type } = req.body;
-      print(req.body);
+      console.log("Request Body: ", req.body);
 
       // Create a new pet info record in the database
-      models.PetInfo.create({
+      PetInfo.create({
         name,
         weight,
         birth,
@@ -72,6 +73,8 @@ const controller = {
           },
         },
       });
+
+      const model = await tf.loadLayersModel("././tf_model/best.h5");
 
       // Process the acceleration data using the 1D-CNN-Model
       const result = await processAccelerationData(accelerationData);
