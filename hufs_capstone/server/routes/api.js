@@ -10,4 +10,8 @@ router.post("/pet", controller.pet);
 // CSV 파일 업로드
 router.post("/upload", controller.upload);
 
+// http://localhost:8000/api/monitoring
+// 모니터링
+router.get("/monitoring", controller.monitoring);
+
 module.exports = router;

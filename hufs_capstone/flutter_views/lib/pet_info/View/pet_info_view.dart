@@ -128,9 +128,9 @@ class _PetInfoInputPageState extends State<PetInfoInputPage> {
                   onTap: () async {
                     await PetInfoController.to.uploadPetInfo(PetInfoModel(
                         pet_id: 1,
+                        name: name.text,
                         birth: age.text,
                         weight: int.parse(weight.text),
-                        name: name.text,
                         type: type.text));
                     Get.to(() => PetStatus(
                           petInfos: PetInfoController.to.petInfo,

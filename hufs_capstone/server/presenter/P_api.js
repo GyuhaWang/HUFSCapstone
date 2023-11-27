@@ -51,6 +51,39 @@ const controller = {
       res.status(500).json({ error: "CSV 파일을 저장하지 못했습니다." });
     }
   },
+
+  // Parses group data from the database, processes it using 1D-CNN-Model and returns the result to the client
+  monitoring: async (req, res) => {
+    try {
+      // Extract pet information from the request body
+      const { setId } = req.body;
+
+      // Get the set_id from the request body and find the set from 'data_set' table
+      const set = await DataSet.findOne({ where: { set_id: setId } });
+
+      // Extract start_id and end_id from it
+      const { start_id, end_id } = set;
+
+      // Pass the data from start_id to end_id in 'acceleration_data' table to the 1D-CNN-Model (best.h5)
+      const accelerationData = await AccelerationData.findAll({
+        where: {
+          id: {
+            [Op.between]: [start_id, end_id],
+          },
+        },
+      });
+
+      // Process the acceleration data using the 1D-CNN-Model
+      const result = await processAccelerationData(accelerationData);
+
+      // Send the result to the client
+      res.status(200).json({ message: "모니터링 성공", data: result });
+    } catch (error) {
+      // Handle errors and send an error response
+      console.error("Error monitoring the pet:", error);
+      res.status(500).json({ error: "반려동물을 모니터링하지 못했습니다." });
+    }
+  },
 };
 
 module.exports = controller;
