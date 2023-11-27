@@ -11,20 +11,35 @@ CREATE TABLE `acceleration_data` (
 );
 */
 const AccelerationData = function (Sequelize, DataTypes) {
-  const model = Sequelize.define("acceleration_data", {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
+  const model = Sequelize.define(
+    "acceleration_data",
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      x: DataTypes.INTEGER,
+      y: DataTypes.INTEGER,
+      z: DataTypes.INTEGER,
+      create_date: DataTypes.DATE,
+      device_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      pet_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
     },
-    x: DataTypes.INTEGER,
-    y: DataTypes.INTEGER,
-    z: DataTypes.INTEGER,
-    create_date: DataTypes.DATE,
-    device_id: DataTypes.INTEGER,
-    pet_id: DataTypes.INTEGER,
-    user_id: DataTypes.INTEGER,
-  });
+    {
+      timestamps: false,
+    }
+  );
   return model;
 };
 module.exports = AccelerationData;

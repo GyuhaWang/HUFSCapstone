@@ -13,9 +13,18 @@ const DataSet = function (Sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true,
     },
-    start_id: DataTypes.INTEGER,
-    end_id: DataTypes.INTEGER,
-    pet_id: DataTypes.INTEGER,
+    start_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    end_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    pet_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   });
   return model;
 };

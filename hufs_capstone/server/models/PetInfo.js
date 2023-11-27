@@ -8,17 +8,35 @@ CREATE TABLE `pet_info` (
 );
 */
 const PetInfo = function (Sequelize, DataTypes) {
-  const model = Sequelize.define("pet_info", {
-    pet_id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
+  const model = Sequelize.define(
+    "pet_info",
+    {
+      pet_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      weight: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      birth: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
+      type: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
     },
-    name: DataTypes.STRING(20),
-    birth: DataTypes.DATE,
-    weight: DataTypes.DECIMAL(5, 2),
-    type: DataTypes.STRING(20),
-  });
+    {
+      timestamps: false,
+    }
+  );
   return model;
 };
 module.exports = PetInfo;
