@@ -38,6 +38,7 @@ const AccelerationData = function (Sequelize, DataTypes) {
     },
     {
       timestamps: false,
+      tableName: "acceleration_data",
     }
   );
   return model;

@@ -20,12 +20,12 @@ const PetInfo = function (Sequelize, DataTypes) {
         type: DataTypes.STRING(20),
         allowNull: false,
       },
-      birth: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-      },
       weight: {
         type: DataTypes.DECIMAL(5, 2),
+        allowNull: true,
+      },
+      birth: {
+        type: DataTypes.INTEGER,
         allowNull: true,
       },
       type: {
@@ -35,6 +35,7 @@ const PetInfo = function (Sequelize, DataTypes) {
     },
     {
       timestamps: false,
+      tableName: "pet_info",
     }
   );
   return model;

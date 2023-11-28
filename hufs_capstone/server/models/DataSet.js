@@ -7,25 +7,32 @@ CREATE TABLE `data_set` (
 );
 */
 const DataSet = function (Sequelize, DataTypes) {
-  const model = Sequelize.define("data_set", {
-    set_id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
+  const model = Sequelize.define(
+    "data_set",
+    {
+      set_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      start_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      end_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      pet_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
     },
-    start_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    end_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    pet_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-  });
+    {
+      timestamps: false,
+      tableName: "data_set",
+    }
+  );
   return model;
 };
 module.exports = DataSet;

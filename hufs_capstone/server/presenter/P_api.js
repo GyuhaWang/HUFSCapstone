@@ -1,29 +1,31 @@
-const { PetInfo, AccelerationData } = require("../models");
+const model = require("../models/index");
 const csv = require("fast-csv");
 const tf = require("@tensorflow/tfjs-node");
 
 const controller = {
   // Controller to store pet information
   pet: async (req, res) => {
-    try {
-      // Extract pet information from the request body
-      const { name, weight, birth, type } = req.body;
-      console.log("Request Body: ", req.body);
+    // Extract pet information from the request body
+    const { name, weight, birth, type } = req.body;
 
-      // Create a new pet info record in the database
-      PetInfo.create({
-        name,
-        weight,
-        birth,
-        type,
+    // Create a new pet info record in the database build by 'Sequalize'
+    model.PetInfo.create({
+      name,
+      weight,
+      birth,
+      type,
+    })
+      .then((res) => {
+        // Send a success response
+        res.status(201).json({ message: "반려동물 정보 저장 성공" });
+      })
+      .catch((error) => {
+        // Handle errors and send an error response
+        console.error(error);
+        res
+          .status(500)
+          .json({ error: "반려동물의 정보를 저장하지 못했습니다." });
       });
-      // Send a success response
-      res.status(201).json({ message: "반려동물 정보 저장 성공" });
-    } catch (error) {
-      // Handle errors and send an error response
-      console.error(error);
-      res.status(500).json({ error: "반려동물의 정보를 저장하지 못했습니다." });
-    }
   },
 
   // Controller to handle CSV file upload
@@ -74,7 +76,7 @@ const controller = {
         },
       });
 
-      const model = await tf.loadLayersModel("././tf_model/best.h5");
+      const model = await tf.loadLayersModel("../tf_model/best.h5");
 
       // Process the acceleration data using the 1D-CNN-Model
       const result = await processAccelerationData(accelerationData);
