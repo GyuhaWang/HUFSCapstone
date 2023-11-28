@@ -18,10 +18,10 @@ const controller = {
         type,
       });
       // Send a success response
-      res.status(201).json({ message: "반려동물 저장 성공", data: newPet });
+      res.status(201).json({ message: "반려동물 정보 저장 성공" });
     } catch (error) {
       // Handle errors and send an error response
-      console.error("Error saving pet information:", error);
+      console.error(error);
       res.status(500).json({ error: "반려동물의 정보를 저장하지 못했습니다." });
     }
   },

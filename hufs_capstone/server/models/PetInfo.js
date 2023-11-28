@@ -2,7 +2,7 @@
 CREATE TABLE `pet_info` (
 	`pet_id` INT NOT NULL PRIMARY KEY,    -- 반려동물 ID
 	`name` CHAR(20),                      -- 이름
-	`birth` DATE,                         -- 생년월일
+	`birth` INT,                         -- 생년월일
 	`weight` DECIMAL(5,2),                -- 무게
 	`type` CHAR(20)                       -- 종류
 );
@@ -21,7 +21,7 @@ const PetInfo = function (Sequelize, DataTypes) {
         allowNull: false,
       },
       birth: {
-        type: DataTypes.DATE,
+        type: DataTypes.INTEGER,
         allowNull: true,
       },
       weight: {

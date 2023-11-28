@@ -1,3 +1,0 @@
-0 sitting
-1 walking
-2 running

@@ -22,7 +22,7 @@ CREATE TABLE `data_set` (
 CREATE TABLE `pet_info` (
 	`pet_id` INT NOT NULL PRIMARY KEY,    -- 반려동물 ID
 	`name` CHAR(20),                      -- 이름
-	`birth` DATE NULL,                         -- 생년월일
+	`birth` INT NULL,                         -- 생년월일
 	`weight` DECIMAL(5,2) NULL,                -- 무게
 	`type` CHAR(20) NULL                       -- 종류
 );

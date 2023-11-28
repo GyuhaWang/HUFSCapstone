@@ -33,6 +33,8 @@ class PetInfoService {
       var response = await http.post(Uri.parse('http://localhost:8000/api/pet'),
           body: jsonEncode(petStatusModel.toJson()));
 
+      print(jsonEncode(petStatusModel.toJson()));
+
       if (response.statusCode == 200) {
         print('File uploaded');
         return "success";
