@@ -7,6 +7,7 @@ const controller = {
   pet: async (req, res) => {
     // Extract pet information from the request body
     const { name, weight, birth, type } = req.body;
+    console.log(name, weight, birth, type);
 
     // Create a new pet info record in the database build by 'Sequalize'
     model.PetInfo.create({
@@ -17,7 +18,8 @@ const controller = {
     })
       .then((res) => {
         // Send a success response
-        res.status(201).json({ message: "반려동물 정보 저장 성공" });
+        // res.status(201).json({ message: "반려동물 정보 저장 성공" });
+        console.log(res);
       })
       .catch((error) => {
         // Handle errors and send an error response

@@ -13,12 +13,13 @@ const PetInfo = function (Sequelize, DataTypes) {
     {
       pet_id: {
         type: DataTypes.INTEGER,
+        allowNull: false,
         primaryKey: true,
         autoIncrement: true,
       },
       name: {
         type: DataTypes.STRING(20),
-        allowNull: false,
+        allowNull: true,
       },
       weight: {
         type: DataTypes.DECIMAL(5, 2),

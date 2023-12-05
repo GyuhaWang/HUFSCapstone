@@ -20,7 +20,7 @@ CREATE TABLE `data_set` (
 
 -- 반려동물 정보를 저장하는 테이블
 CREATE TABLE `pet_info` (
-	`pet_id` INT NOT NULL PRIMARY KEY,    -- 반려동물 ID
+	`pet_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,    -- 반려동물 ID
 	`name` CHAR(20),                      -- 이름
 	`birth` INT NULL,                         -- 생년월일
 	`weight` DECIMAL(5,2) NULL,                -- 무게
@@ -30,3 +30,5 @@ CREATE TABLE `pet_info` (
 -- 필요한 쿼리 요건에 따라 적절한 인덱스 추가
 CREATE INDEX `idx_pet_id` ON `acceleration_data`(`pet_id`);
 -- 필요한 경우 추가 인덱스를 추가
+
+ALTER TABLE `pet_info` MODIFY `pet_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
